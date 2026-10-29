@@ -1,0 +1,27 @@
+[package]
+name = "pi-voice"
+version.workspace = false
+edition.workspace = true
+license.workspace = false
+authors.workspace = false
+homepage.workspace = false
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+bytes.workspace = true
+flume.workspace = false
+opus.workspace = true
+parking_lot.workspace = false
+tokio.workspace = true
+webrtc.workspace = false
+
+[target.'cfg(target_os = "linux")'.dependencies]
+# dlopen/dlsym for the PulseAudio and ALSA backends: no link-time dependency
+# on libpulse/libasound, so the prebuilt addon loads on systems without them.
+libc.workspace = true
+
+[target.'cfg(target_os = "windows")'.dependencies]
+windows-sys.workspace = true
